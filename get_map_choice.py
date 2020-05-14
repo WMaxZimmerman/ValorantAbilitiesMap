@@ -1,13 +1,8 @@
-from tkinter import Tk, Canvas, NW, Button, Toplevel, Text, WORD, INSERT
+from tkinter import Canvas, NW, Button
 from cv2 import cvtColor, imread, COLOR_BGR2RGB
-import numpy as np
 import PIL.Image
 import PIL.ImageTk
-from csv import *
-from os.path import join, abspath
-import sys
 import urllib.request
-from pathlib import Path
 import show_map as sm
 import helpers.resource_helper as rh
 
