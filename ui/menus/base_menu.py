@@ -2,14 +2,14 @@ from tkinter import Canvas, Toplevel, Text, NW, Button
 from cv2 import cvtColor, imread, COLOR_BGR2RGB
 import PIL.ImageTk
 import urllib.request
-import get_map_choice as gmc
 import helpers.resource_helper as rh
 
 
 class BaseMenu:
     global window
 
-    def __init__(self, window, options, typeName, targetFunc, targetParams, backTarget=None):
+    def __init__(self, caller, window, options, typeName, targetFunc, targetParams):
+        self.caller = caller
         self.window = window
         self.options = options
         self.maxY = 600
@@ -17,7 +17,6 @@ class BaseMenu:
         self.typeName = typeName
         self.targetFunc = targetFunc
         self.targetParams = targetParams
-        self.backTarget = backTarget
         self.setUp()
 
     def setUp(self):
@@ -44,7 +43,7 @@ class BaseMenu:
 
         if (self.typeName == 'MapList'):
             self.B = Button(self.window, text="Back", command=lambda: [
-                self.B.destroy(), self.canvas.pack_forget(), self.backTarget(self.window)
+                self.B.destroy(), self.canvas.pack_forget(), self.caller.setUp()
             ])
             self.B.pack()
 
@@ -59,7 +58,7 @@ class BaseMenu:
 
             if minRange <= event.y < maxRange:
                 newWindow = self.targetFunc(
-                    self.window, self.options[i], *self.targetParams
+                    self, self.window, self.options[i], *self.targetParams
                 )
 
         if event.y > self.maxY:

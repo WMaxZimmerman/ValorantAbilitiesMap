@@ -6,8 +6,6 @@ import PIL.ImageTk
 from csv import *
 import urllib.request
 import helpers.resource_helper as rh
-from ui.menus.map_menu import MapMenu
-from ui.menus.agent_menu import AgentMenu
 
 
 class showMap:
@@ -18,11 +16,14 @@ class showMap:
     global mapName
     global agentName
 
-    def __init__(self, window, mapName, agent):
+    def __init__(self, caller, window, mapName, agent):
+        self.caller = caller
         self.windowMaster = window
         self.mapName = mapName
         self.agentName = agent
+        self.setUp()
 
+    def setUp(self):
         imgName = 'Images\\' + self.mapName + 'Sides.png'
         imgPath = rh.get_resource_path(imgName)
 
@@ -49,7 +50,7 @@ class showMap:
         self.canvas.create_image(0, 0, image=photo, anchor=NW)
 
         self.B = Button(self.windowMaster, text="Back", command=lambda: [self.B.destroy(
-        ), self.canvas.pack_forget(), MapMenu(self.windowMaster, self.agentName, AgentMenu)])
+        ), self.canvas.pack_forget(), self.caller.setUp()])
         self.B.pack()
 
         self.windowMaster.mainloop()
@@ -184,7 +185,7 @@ class showMap:
                     self.locs2[x, 1])+12), (int(self.locs2[x, 2])+12), fill='red')
 
         B = Button(self.windowMaster, text="Back", command=lambda: [B.destroy(
-        ), canvas.pack_forget(), self.__init__(self.windowMaster, self.mapName, self.agentName)])
+        ), canvas.pack_forget(), self.setUp()])
         B.pack()
 
         self.windowMaster.mainloop()

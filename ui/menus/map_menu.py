@@ -8,7 +8,7 @@ from ui.menus.base_menu import BaseMenu
 
 
 class MapMenu(BaseMenu):
-    def __init__(self, window, agent, backTarget):
+    def __init__(self, caller, window, agent):
         options = [
             "Bind",
             "Haven",
@@ -16,10 +16,10 @@ class MapMenu(BaseMenu):
         ]
         typeName = 'MapList'
         super().__init__(
+            caller,
             window,
             options,
             typeName,
             sm.showMap,
-            [agent],
-            backTarget
+            [agent]
         )
