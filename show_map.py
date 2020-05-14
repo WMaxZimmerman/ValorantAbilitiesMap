@@ -6,6 +6,8 @@ import PIL.ImageTk
 from csv import *
 import urllib.request
 import helpers.resource_helper as rh
+from ui.menus.map_menu import MapMenu
+from ui.menus.agent_menu import AgentMenu
 
 
 class showMap:
@@ -47,7 +49,7 @@ class showMap:
         self.canvas.create_image(0, 0, image=photo, anchor=NW)
 
         self.B = Button(self.windowMaster, text="Back", command=lambda: [self.B.destroy(
-        ), self.canvas.pack_forget(), getMapChoice(self.windowMaster, self.agentName)])
+        ), self.canvas.pack_forget(), MapMenu(self.windowMaster, self.agentName, AgentMenu)])
         self.B.pack()
 
         self.windowMaster.mainloop()

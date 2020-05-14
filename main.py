@@ -1,6 +1,7 @@
 from tkinter import Tk
 from pathlib import Path
 import get_agent_choice as gac
+from ui.menus.agent_menu import AgentMenu
 import helpers.resource_helper as rh
 
 
@@ -17,7 +18,7 @@ def run():
     window = Tk()
     window.title('Map Choice')
 
-    start = gac.getAgentChoice(window)
+    start = AgentMenu(window)
 
 
 if __name__ == "__main__":
