@@ -17,10 +17,11 @@ class showMap(BaseUi):
     global mapName
     global agentName
 
-    def __init__(self, caller, window, mapName, agent, side):
+    def __init__(self, caller, window, side, agent, mapName):
         self.mapName = mapName
         self.agentName = agent
         self.sideName = side
+        self.typeName = None
         super().__init__(caller, window)
         self.setUp()
 
@@ -38,15 +39,16 @@ class showMap(BaseUi):
 
         self.locCount = self.locs.shape[0]
 
+        super().setUp(self.mapName, self.posCheck, self.preloopFunc)
+
+    def preloopFunc(self):
         for x in range(0, self.locCount):
             if (int(self.locs[x, 0]) % 2) == 0:
-                canvas.create_rectangle(int(self.locs[x, 1]), int(self.locs[x, 2]), (int(
+                self.canvas.create_rectangle(int(self.locs[x, 1]), int(self.locs[x, 2]), (int(
                     self.locs[x, 1])+12), (int(self.locs[x, 2])+12), fill='blue')
             else:
-                canvas.create_rectangle(int(self.locs[x, 1]), int(self.locs[x, 2]), (int(
+                self.canvas.create_rectangle(int(self.locs[x, 1]), int(self.locs[x, 2]), (int(
                     self.locs[x, 1])+12), (int(self.locs[x, 2])+12), fill='red')
-
-        super().setUp(self.mapName, self.posCheck)
 
     def posCheck(self, event):
         print(str(event.x) + ', ' + str(event.y))

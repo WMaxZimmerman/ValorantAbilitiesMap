@@ -13,7 +13,7 @@ class BaseUi:
         self.caller = caller
         self.window = window
 
-    def setUp(self, nameOfImage, targetFunc):
+    def setUp(self, nameOfImage, targetFunc, preloopFunc=None):
         cv_img = rh.get_image(nameOfImage)
 
         self.height, self.width, ne_channels = cv_img.shape
@@ -33,5 +33,8 @@ class BaseUi:
             self.B.destroy(), self.canvas.pack_forget(), self.caller.setUp()
         ])
         self.B.pack()
+
+        if (preloopFunc):
+            preloopFunc()
 
         self.window.mainloop()

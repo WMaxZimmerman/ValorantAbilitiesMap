@@ -31,7 +31,7 @@ def get_image(name: str):
 
 def get_location_image(agent, mapName, loc):
     picName = 'LocationImages\\' + agent + mapName + loc + '.png'
-    picPath = rh.get_resource_path(picName)
+    picPath = get_resource_path(picName)
     if (path.exists(picPath) == False):
         url = 'https://valmap.s3.amazonaws.com/' + \
             agent + '/' + agent + mapName + loc + '.png'
@@ -45,7 +45,7 @@ def get_location_image(agent, mapName, loc):
 
 def get_csv(agent: str, mapName: str, side: str):
     fileName = 'Locations\\' + agent + mapName + side + '.csv'
-    filePath = rh.get_resource_path(fileName)
+    filePath = get_resource_path(fileName)
 
     if (path.exists(filePath) == False):
         url = 'https://valmap.s3.amazonaws.com/' + self.agentName + \

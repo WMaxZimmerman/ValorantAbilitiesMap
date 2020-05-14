@@ -31,7 +31,6 @@ class BaseMenu(BaseUi):
 
             if minRange <= event.y < maxRange:
                 self.B.destroy()
-                print(self.targetFunc)
                 newWindow = self.targetFunc(
                     self, self.window, self.options[i], *self.targetParams
                 )
