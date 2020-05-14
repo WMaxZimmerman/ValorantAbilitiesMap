@@ -120,7 +120,7 @@ class showMap:
                     self.locs[x, 1])+12), (int(self.locs[x, 2])+12), fill='red')
 
         B = Button(self.windowMaster, text="Back", command=lambda: [B.destroy(
-        ), canvas.pack_forget(), self.__init__(self.windowMaster, self.mapName, self.agentName)])
+        ), canvas.pack_forget(), self.setUp()])
         B.pack()
 
         self.windowMaster.mainloop()
@@ -231,7 +231,7 @@ class showMap:
                     self.locs[x, 1])+12), (int(self.locs[x, 2])+12), fill='red')
 
         B = Button(self.windowMaster, text="Back", command=lambda: [B.destroy(
-        ), canvas.pack_forget(), self.__init__(self.windowMaster, self.mapName, self.agentName)])
+        ), canvas.pack_forget(), self.setUp()])
         B.pack()
 
         self.windowMaster.mainloop()

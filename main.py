@@ -20,6 +20,9 @@ class Main():
 
         start = AgentMenu(self, window)
 
+    def setUp(self):
+        exit()
+
 
 if __name__ == "__main__":
     main = Main()

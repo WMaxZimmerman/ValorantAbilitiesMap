@@ -41,11 +41,13 @@ class BaseMenu:
         photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(cv_img))
         self.canvas.create_image(0, 0, image=photo, anchor=NW)
 
-        if (self.typeName == 'MapList'):
-            self.B = Button(self.window, text="Back", command=lambda: [
-                self.B.destroy(), self.canvas.pack_forget(), self.caller.setUp()
-            ])
-            self.B.pack()
+        buttonText = "Back"
+        if self.typeName == "AgentList":
+            buttonText = "Exit"
+        self.B = Button(self.window, text=buttonText, command=lambda: [
+            self.B.destroy(), self.canvas.pack_forget(), self.caller.setUp()
+        ])
+        self.B.pack()
 
         self.window.mainloop()
 
@@ -57,6 +59,7 @@ class BaseMenu:
             maxRange = minRange + self.yModifier
 
             if minRange <= event.y < maxRange:
+                self.B.destroy()
                 newWindow = self.targetFunc(
                     self, self.window, self.options[i], *self.targetParams
                 )
