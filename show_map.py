@@ -10,13 +10,6 @@ from ui.base_ui import BaseUi
 
 
 class showMap(BaseUi):
-    global windowMaster
-    global canvas
-    global height
-    global width
-    global mapName
-    global agentName
-
     def __init__(self, caller, window, side, agent, mapName):
         self.mapName = mapName
         self.agentName = agent
@@ -33,7 +26,7 @@ class showMap(BaseUi):
         if (self.sideName == "Both"):
             attack_locs = rh.get_csv(self.agentName, self.mapName, "Attacker")
             defend_locs = rh.get_csv(self.agentName, self.mapName, "Defender")
-            self.locs = np.concatenate(attack_locs, defend_locs)
+            self.locs = np.concatenate((attack_locs, defend_locs))
         else:
             self.locs = rh.get_csv(self.agentName, self.mapName, self.sideName)
 

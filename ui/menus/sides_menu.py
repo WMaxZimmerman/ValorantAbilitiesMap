@@ -11,8 +11,6 @@ import show_map as sm
 
 
 class SidesMenu(BaseMenu):
-    global window
-
     def __init__(self, caller, window, mapName, agent):
         self.mapName = mapName
         self.agentName = agent

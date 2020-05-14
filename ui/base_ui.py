@@ -7,8 +7,6 @@ import helpers.resource_helper as rh
 
 
 class BaseUi:
-    global window
-
     def __init__(self, caller, window):
         self.caller = caller
         self.window = window

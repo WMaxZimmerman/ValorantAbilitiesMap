@@ -7,8 +7,6 @@ import helpers.resource_helper as rh
 
 
 class BaseMenu(BaseUi):
-    global window
-
     def __init__(self, caller, window, options, typeName, targetFunc, targetParams):
         self.options = options
         self.maxY = 600
