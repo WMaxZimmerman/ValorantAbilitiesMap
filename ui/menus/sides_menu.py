@@ -7,7 +7,7 @@ from csv import *
 import urllib.request
 import helpers.resource_helper as rh
 from ui.menus.base_menu import BaseMenu
-import show_map as sm
+from ui.map_ui import MapUi
 
 
 class SidesMenu(BaseMenu):
@@ -25,6 +25,6 @@ class SidesMenu(BaseMenu):
             window,
             options,
             typeName,
-            sm.showMap,
+            MapUi,
             [self.agentName, self.mapName]
         )

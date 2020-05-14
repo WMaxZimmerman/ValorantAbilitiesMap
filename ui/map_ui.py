@@ -9,7 +9,7 @@ import helpers.resource_helper as rh
 from ui.base_ui import BaseUi
 
 
-class showMap(BaseUi):
+class MapUi(BaseUi):
     def __init__(self, caller, window, side, agent, mapName):
         self.mapName = mapName
         self.agentName = agent
