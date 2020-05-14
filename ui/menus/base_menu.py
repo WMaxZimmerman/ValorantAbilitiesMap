@@ -2,54 +2,25 @@ from tkinter import Canvas, Toplevel, Text, NW, Button
 from cv2 import cvtColor, imread, COLOR_BGR2RGB
 import PIL.ImageTk
 import urllib.request
+from ui.base_ui import BaseUi
 import helpers.resource_helper as rh
 
 
-class BaseMenu:
+class BaseMenu(BaseUi):
     global window
 
     def __init__(self, caller, window, options, typeName, targetFunc, targetParams):
-        self.caller = caller
-        self.window = window
         self.options = options
         self.maxY = 600
         self.yModifier = self.maxY / len(options)
         self.typeName = typeName
         self.targetFunc = targetFunc
         self.targetParams = targetParams
+        super().__init__(caller, window)
         self.setUp()
 
     def setUp(self):
-        imgName = f'Images\\{self.typeName}.png'
-        imgPath = rh.get_resource_path(imgName)
-
-        url = f'https://valmap.s3.amazonaws.com/{self.typeName}.png'
-
-        with urllib.request.urlopen(url) as response, open(imgPath, 'wb') as out_file:
-            data = response.read()
-            out_file.write(data)
-
-        cv_img = cvtColor(imread(imgPath), COLOR_BGR2RGB)
-
-        height, width, ne_channels = cv_img.shape
-
-        self.canvas = Canvas(self.window, width=width, height=height)
-        self.canvas.bind("<Button 1>", self.makeChoice)
-
-        self.canvas.pack()
-
-        photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(cv_img))
-        self.canvas.create_image(0, 0, image=photo, anchor=NW)
-
-        buttonText = "Back"
-        if self.typeName == "AgentList":
-            buttonText = "Exit"
-        self.B = Button(self.window, text=buttonText, command=lambda: [
-            self.B.destroy(), self.canvas.pack_forget(), self.caller.setUp()
-        ])
-        self.B.pack()
-
-        self.window.mainloop()
+        super().setUp(self.typeName, self.makeChoice)
 
     def makeChoice(self, event):
         self.canvas.pack_forget()
@@ -60,6 +31,7 @@ class BaseMenu:
 
             if minRange <= event.y < maxRange:
                 self.B.destroy()
+                print(self.targetFunc)
                 newWindow = self.targetFunc(
                     self, self.window, self.options[i], *self.targetParams
                 )
